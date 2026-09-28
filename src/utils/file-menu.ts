@@ -16,6 +16,8 @@ export function addXournalppOptionsToFileMenu(menu: Menu, file: TFile | TFolder,
                 addXournalppRenameMenu(menu, file, xoppFile, plugin);
                 addXournalppDeleteMenu(menu, file, xoppFile, plugin);
                 removeDeleteRenameMenuItem();
+            } else {
+                addOpenPDFInXournalppMenu(menu, file, plugin);
             }
         }
     } else if (file instanceof TFolder) {
@@ -40,6 +42,16 @@ function addOpenInXournalppMenu(menu: Menu, xoppFile: TFile, plugin: XoppPlugin)
                 let filePath = plugin.app.workspace.getActiveFile()?.path as string;
                 filePath = filePath?.replace(".pdf", ".xopp");
                 void exportXoppToPDF(plugin, [filePath]);
+            });
+    });
+}
+
+function addOpenPDFInXournalppMenu(menu: Menu, pdfFile: TFile, plugin: XoppPlugin) {
+    menu.addItem((item) => {
+        item.setTitle("View PDF in Xournal++")
+            .setIcon("pencil-ruler")
+            .onClick(() => {
+                void openXournalppFile(pdfFile, plugin);
             });
     });
 }
