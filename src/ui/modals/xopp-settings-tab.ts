@@ -109,6 +109,19 @@ export class XoppSettingsTab extends PluginSettingTab {
                 },
             },
             {
+                name:"PDF Annotation Workflow",
+                desc:"The workflow you want to follow when annotating a PDF in Xournal++",
+                control: {
+                    type:"dropdown",
+                    key:"pdfAnnotationWorkflow",
+                    defaultValue:"backgroundFile",
+                    options: {
+                        backgroundFile:"Create new .xopp file in the current directory with PDF as background",
+                        open:"View PDF in Xournal++ directly and save it manually"
+                    }
+                }
+            },
+            {
                 name: "Xournal++ templates folder",
                 desc: "Relative path to the folder that contains your Xournal++ .xopp templates.",
                 control: {
@@ -229,6 +242,21 @@ export class XoppSettingsTab extends PluginSettingTab {
                     void this.plugin.saveSettings();
                 });
             });
+        
+        new Setting(containerEl)
+            .setName("PDF Annotation Workflow")
+            .setDesc("The workflow you want to follow when annotating a PDF in Xournal++")
+            .addDropdown((dropdown) => {
+                dropdown.addOptions({
+                    backgroundFile:"Create new .xopp file in the current directory with PDF as background",
+                    open:"View PDF in Xournal++ directly and save it manually"
+                })
+            .setValue(this.plugin.settings.pdfAnnotationWorkflow)
+            .onChange((value) => {
+                this.plugin.settings.pdfAnnotationWorkflow=value;
+                this.plugin.saveSettings()
+                })
+            })
 
         new Setting(containerEl)
             .setName("Xournal++ templates folder")
