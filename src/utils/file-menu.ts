@@ -60,6 +60,26 @@ function addOpenInXournalppMenu(menu: Menu, xoppFile: TFile, plugin: XoppPlugin)
     });
 }
 
+function addAnnotatePdfMenu(menu: Menu, pdfFile: TFile, plugin: XoppPlugin) {
+    if (plugin.settings.pdfAnnotationWorkflow === "open") {
+        menu.addItem((item) => {
+            item.setTitle("View PDF in Xournal++")
+                .setIcon("pencil-ruler")
+                .onClick(() => {
+                    void openXournalppFile(pdfFile, plugin);
+                });
+        });
+    } else {
+        menu.addItem((item) => {
+            item.setTitle("Annotate PDF in Xournal++")
+                .setIcon("pen-tool")
+                .onClick(() => {
+                    //void createAnnotatedXoppFromPdf(pdfFile, plugin);
+                });
+        });
+    }
+}
+
 function addCreateXournalppMenu(menu: Menu, folder: TFolder, plugin: XoppPlugin) {
     menu.addItem((item) => {
         item.setTitle("Create new Xournal++")
