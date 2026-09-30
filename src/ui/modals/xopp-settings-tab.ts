@@ -254,9 +254,9 @@ export class XoppSettingsTab extends PluginSettingTab {
             .setValue(this.plugin.settings.pdfAnnotationWorkflow)
             .onChange((value) => {
                 this.plugin.settings.pdfAnnotationWorkflow=value;
-                this.plugin.saveSettings()
-                })
-            })
+                void this.plugin.saveSettings();
+                });
+            });
 
         new Setting(containerEl)
             .setName("Xournal++ templates folder")

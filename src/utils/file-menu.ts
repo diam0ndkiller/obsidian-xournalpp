@@ -47,7 +47,7 @@ function addOpenInXournalppMenu(menu: Menu, xoppFile: TFile, plugin: XoppPlugin)
 }
 
 function addAnnotatePdfMenu(menu: Menu, pdfFile: TFile, plugin: XoppPlugin) {
-    if (plugin.settings.pdfAnnotationWorkflow == "open") {
+    if (plugin.settings.pdfAnnotationWorkflow === "open") {
         menu.addItem((item) => {
             item.setTitle("View PDF in Xournal++")
                 .setIcon("pencil-ruler")
