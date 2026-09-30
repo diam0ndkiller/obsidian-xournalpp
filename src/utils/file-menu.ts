@@ -1,10 +1,10 @@
 import { Menu, TFile, TFolder } from "obsidian";
 import {
-    createAnnotatedXoppFromPdf,
     deleteXoppAndPdf,
     findCorrespondingXoppToPdf,
     openXournalppFile,
     renameXoppFile,
+    viewPdfOrCreateAnnotatedXoppFileFromPdf,
 } from "./xopp-actions";
 import CreateXoppModalManager from "src/ui/managers/create-xopp-modal-manager";
 import XoppPlugin from "src/main";
@@ -34,23 +34,13 @@ export function addXournalppOptionsToFileMenu(menu: Menu, file: TFile | TFolder,
 }
 
 function addAnnotatePdfMenu(menu: Menu, pdfFile: TFile, plugin: XoppPlugin) {
-    if (plugin.settings.pdfAnnotationWorkflow === "open") {
-        menu.addItem((item) => {
-            item.setTitle("View PDF in Xournal++")
-                .setIcon("pencil-ruler")
-                .onClick(() => {
-                    void openXournalppFile(pdfFile, plugin);
-                });
-        });
-    } else {
-        menu.addItem((item) => {
-            item.setTitle("Annotate PDF in Xournal++")
-                .setIcon("pen-tool")
-                .onClick(() => {
-                    void createAnnotatedXoppFromPdf(pdfFile, plugin);
-                });
-        });
-    }
+    menu.addItem((item) => {
+        item.setTitle("Annotate PDF in Xournal++")
+            .setIcon("pen-tool")
+            .onClick(() => {
+                void viewPdfOrCreateAnnotatedXoppFileFromPdf(pdfFile, plugin);
+            });
+    });
 }
 
 function addOpenInXournalppMenu(menu: Menu, xoppFile: TFile, plugin: XoppPlugin) {

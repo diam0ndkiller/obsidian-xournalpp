@@ -71,6 +71,14 @@ export async function createXoppFile(plugin: XoppPlugin, newNoteName: string, se
     }
 }
 
+export async function viewPdfOrCreateAnnotatedXoppFileFromPdf(pdfFile: TFile, plugin: XoppPlugin): Promise<void> {
+    if (plugin.settings.pdfAnnotationWorkflow === "open") {
+        void openXournalppFile(pdfFile, plugin);
+    } else {
+        void createAnnotatedXoppFromPdf(pdfFile, plugin);
+    }
+}
+
 export async function createAnnotatedXoppFromPdf(pdfFile: TFile, plugin: XoppPlugin): Promise<void> {
     if (annotationCreationsInFlight.has(pdfFile.path)) {
         new Notice("Xournal++ annotation creation is already in progress for this PDF.");
